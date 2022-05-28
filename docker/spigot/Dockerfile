@@ -2,7 +2,7 @@ FROM openjdk:8-jdk as spigot-builder
 
 WORKDIR /work
 ADD https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar BuildTools.jar
-RUN java -jar BuildTools.jar -o /artifact --rev 1.12.2
+RUN java -jar BuildTools.jar -o /artifact --rev 1.13.2
 
 FROM ghcr.io/giganticminecraft/chunk-search-rs:ea37d2d as chunk-search-provider
 
