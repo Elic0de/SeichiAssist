@@ -131,29 +131,27 @@ class BlockLineUpTriggerListener[
       Seq(Some(available), manaCap, Some(64L)).flatten.min
     }.toInt
 
+    // TODO これをlegacyMaterialから置き換えるべきだが、現時点ではよくわからないのでとりあえずlegacyMaterialを利用する
     def slabToDoubleSlab(material: Material) = material match {
-      case Material.STONE_SLAB2 => Material.DOUBLE_STONE_SLAB2
-      case Material.PURPUR_SLAB => Material.PURPUR_DOUBLE_SLAB
-      case Material.WOOD_STEP   => Material.WOOD_DOUBLE_STEP
-      case Material.STEP        => Material.DOUBLE_STEP
-      case _                    => mainHandItemType
+      case Material.LEGACY_STONE_SLAB2 => Material.LEGACY_DOUBLE_STONE_SLAB2
+      case Material.PURPUR_SLAB        => Material.LEGACY_PURPUR_DOUBLE_SLAB
+      case Material.LEGACY_WOOD_STEP   => Material.LEGACY_WOOD_DOUBLE_STEP
+      case Material.LEGACY_STEP        => Material.LEGACY_DOUBLE_STEP
+      case _                           => mainHandItemType
     }
 
     val playerHoldsSlabBlock = BuildAssist.material_slab2.contains(mainHandItemType)
     val doesHoldLeaves =
-      (mainHandItemType eq Material.LEAVES) || (mainHandItemType eq Material.LEAVES_2)
+      (mainHandItemType eq Material.OAK_LEAVES) || (mainHandItemType eq Material.DARK_OAK_LEAVES) || (
+        mainHandItemType eq Material.BIRCH_LEAVES
+      ) || (mainHandItemType eq Material.ACACIA_LEAVES) || (
+        mainHandItemType eq Material.JUNGLE_LEAVES
+      ) || (mainHandItemType eq Material.SPRUCE_LEAVES)
     val slabLineUpStepMode = buildAssistData.line_up_step_flg
     val shouldPlaceDoubleSlabs = playerHoldsSlabBlock && slabLineUpStepMode == 2
 
     val upsideBit = 8
     val noDecayBit = 8
-    val placingBlockData: Byte =
-      if (playerHoldsSlabBlock && slabLineUpStepMode == 0)
-        (mainHandItemData | upsideBit).toByte
-      else if (doesHoldLeaves)
-        (mainHandItemData | noDecayBit).toByte
-      else
-        mainHandItemData
 
     val (placingBlockType, itemConsumptionPerPlacement, placementIteration) =
       if (shouldPlaceDoubleSlabs)
@@ -191,7 +189,6 @@ class BlockLineUpTriggerListener[
         }
 
         block.setType(placingBlockType)
-        block.setData(placingBlockData)
 
         placedBlockCount += itemConsumptionPerPlacement
       }

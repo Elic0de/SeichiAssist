@@ -86,8 +86,7 @@ object MenuInventoryData {
     inventory.setItem(13, itemstack)
 
     // 範囲をMAXへ
-    itemstack = new ItemStack(Material.SKULL_ITEM, 11)
-    itemstack.setDurability(3.toShort)
+    itemstack = new ItemStack(Material.PLAYER_HEAD, 11)
     skullmeta.setDisplayName(s"$RED$UNDERLINE${BOLD}範囲設定を最大値に変更")
     lore = List(
       s"$RESET${AQUA}現在の範囲設定：$ZSSkillA×$ZSSkillA",
@@ -103,9 +102,8 @@ object MenuInventoryData {
     AsyncInventorySetter.setItemAsync(inventory, 19, itemstack)
 
     // 範囲を一段階増加
-    itemstack = new ItemStack(Material.SKULL_ITEM, 7)
+    itemstack = new ItemStack(Material.PLAYER_HEAD, 7)
     skullmeta = ItemMetaFactory.SKULL.getValue
-    itemstack.setDurability(3.toShort)
     skullmeta.setDisplayName(s"$YELLOW$UNDERLINE${BOLD}範囲設定を一段階大きくする")
     lore = List(
       s"$RESET${AQUA}現在の範囲設定：$ZSSkillA×$ZSSkillA",
@@ -122,9 +120,8 @@ object MenuInventoryData {
     AsyncInventorySetter.setItemAsync(inventory, 20, itemstack)
 
     // 範囲を初期値へ
-    itemstack = new ItemStack(Material.SKULL_ITEM, 5)
+    itemstack = new ItemStack(Material.PLAYER_HEAD, 5)
     skullmeta = ItemMetaFactory.SKULL.getValue
-    itemstack.setDurability(3.toShort)
     skullmeta.setDisplayName(s"$RED$UNDERLINE${BOLD}範囲設定を初期値に変更")
     lore =
       List(s"$RESET${AQUA}現在の範囲設定：$ZSSkillA×$ZSSkillA", s"$RESET$AQUA${UNDERLINE}変更後の範囲設定：5×5")
@@ -138,9 +135,8 @@ object MenuInventoryData {
     AsyncInventorySetter.setItemAsync(inventory, 22, itemstack)
 
     // 範囲を一段階減少
-    itemstack = new ItemStack(Material.SKULL_ITEM, 3)
+    itemstack = new ItemStack(Material.PLAYER_HEAD, 3)
     skullmeta = ItemMetaFactory.SKULL.getValue
-    itemstack.setDurability(3.toShort)
     skullmeta.setDisplayName(s"$YELLOW$UNDERLINE${BOLD}範囲設定を一段階小さくする")
     lore = List(
       s"$RESET${AQUA}現在の範囲設定：$ZSSkillA×$ZSSkillA",
@@ -157,9 +153,8 @@ object MenuInventoryData {
     AsyncInventorySetter.setItemAsync(inventory, 24, itemstack)
 
     // 範囲をMINへ
-    itemstack = new ItemStack(Material.SKULL_ITEM, 1)
+    itemstack = new ItemStack(Material.PLAYER_HEAD, 1)
     skullmeta = ItemMetaFactory.SKULL.getValue
-    itemstack.setDurability(3.toShort)
     skullmeta.setDisplayName(s"$RED$UNDERLINE${BOLD}範囲設定を最小値に変更")
     lore =
       List(s"$RESET${AQUA}現在の範囲設定：$ZSSkillA×$ZSSkillA", s"$RESET$AQUA${UNDERLINE}変更後の範囲設定：3×3")
@@ -200,8 +195,8 @@ object MenuInventoryData {
     val playerdata = BuildAssist.instance.temporaryData(uuid)
 
     val inventory = Bukkit.getServer.createInventory(null, 4 * 9, s"$DARK_PURPLE$BOLD「直列設置」設定")
-    var itemstack = new ItemStack(Material.SKULL_ITEM, 1)
-    var itemmeta: ItemMeta = Bukkit.getItemFactory.getItemMeta(Material.WOOD)
+    var itemstack = new ItemStack(Material.PLAYER_HEAD, 1)
+    var itemmeta: ItemMeta = itemstack.getItemMeta
     val skullmeta: SkullMeta = ItemMetaFactory.SKULL.getValue
     var lore = List(s"$RESET$DARK_RED${UNDERLINE}クリックで移動")
 
@@ -218,7 +213,7 @@ object MenuInventoryData {
     AsyncInventorySetter.setItemAsync(inventory, 27, itemstack)
 
     // 直列設置設定
-    itemstack = new ItemStack(Material.WOOD, 1)
+    itemstack = new ItemStack(Material.OAK_WOOD, 1)
     itemmeta.setDisplayName(
       s"$YELLOW$UNDERLINE${BOLD}直列設置 ：${BuildAssist.line_up_str(playerdata.line_up_flg)}"
     )
@@ -233,8 +228,8 @@ object MenuInventoryData {
     inventory.setItem(0, itemstack)
 
     // 直列設置ハーフブロック設定
-    itemstack = new ItemStack(Material.STEP, 1)
-    itemmeta = Bukkit.getItemFactory.getItemMeta(Material.STEP)
+    itemstack = new ItemStack(Material.STONE_SLAB, 1)
+    itemmeta = itemstack.getItemMeta
     itemmeta.setDisplayName(
       s"$YELLOW$UNDERLINE${BOLD}ハーフブロック設定 ：${BuildAssist.line_up_step_str(playerdata.line_up_step_flg)}"
     )
