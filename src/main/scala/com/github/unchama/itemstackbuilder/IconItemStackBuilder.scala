@@ -9,11 +9,9 @@ import org.bukkit.inventory.meta.ItemMeta
  *
  * @param material
  *   ItemStackに設定するMaterial
- * @param durability
- *   ダメージ値 Created by karayuu on 2019/03/30
  */
-class IconItemStackBuilder(material: Material, durability: Short = 0.toShort)
-    extends AbstractItemStackBuilder[ItemMeta](material, durability) {
+class IconItemStackBuilder(material: Material)
+    extends AbstractItemStackBuilder[ItemMeta](material) {
   private var shouldShowAttribute: Boolean = false
 
   /**

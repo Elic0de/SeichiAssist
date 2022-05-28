@@ -11,10 +11,7 @@ import java.util.UUID
  * Created by karayuu on 2019/04/09
  */
 class SkullItemStackBuilder(private val owner: SkullOwnerReference)
-    extends AbstractItemStackBuilder[SkullMeta](
-      Material.SKULL_ITEM,
-      SkullType.PLAYER.ordinal.toShort
-    ) {
+    extends AbstractItemStackBuilder[SkullMeta](Material.PLAYER_HEAD) {
 
   /**
    * プレーヤーがサーバーに参加したことのない場合に 頭のスキンを読み込むことができないため、そのようなケースが想定されるされる箇所では
