@@ -39,20 +39,22 @@ object VotingFairyTask {
 
   // 妖精効果音
   private def playSe(p: Player): Unit = {
-    p.playSound(p.getLocation, Sound.BLOCK_NOTE_PLING, 2.0f, 1.0f)
+    p.playSound(p.getLocation, Sound.BLOCK_NOTE_BLOCK_PLING, 2.0f, 1.0f)
     Bukkit
       .getServer
       .getScheduler
       .runTaskLater(
         SeichiAssist.instance,
         (() => {
-          p.playSound(p.getLocation, Sound.BLOCK_NOTE_PLING, 2.0f, 1.5f)
+          p.playSound(p.getLocation, Sound.BLOCK_NOTE_BLOCK_PLING, 2.0f, 1.5f)
           Bukkit
             .getServer
             .getScheduler
             .runTaskLater(
               SeichiAssist.instance,
-              (() => p.playSound(p.getLocation, Sound.BLOCK_NOTE_PLING, 2.0f, 2.0f)): Runnable,
+              (
+                () => p.playSound(p.getLocation, Sound.BLOCK_NOTE_BLOCK_PLING, 2.0f, 2.0f)
+              ): Runnable,
               2
             )
         }): Runnable,

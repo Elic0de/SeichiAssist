@@ -76,7 +76,7 @@ public final class StaticGachaPrizeFactory {
      */
     public static @NotNull ItemStack getMineHeadItem() {
         if (sickleOfDeathGod == null) {
-            sickleOfDeathGod = new ItemStack(Material.CARROT_STICK, 1, (short) 1);
+            sickleOfDeathGod = new ItemStack(Material.CARROT_ON_A_STICK, 1, (short) 1);
             ItemMeta itemmeta = Bukkit.getItemFactory().getItemMeta(Material.FEATHER);
             itemmeta.setDisplayName(getMineHeadItemName());
             itemmeta.setLore(getMineHeadItemLore());

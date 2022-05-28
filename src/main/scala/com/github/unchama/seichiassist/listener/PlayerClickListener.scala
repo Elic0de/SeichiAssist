@@ -240,7 +240,7 @@ class PlayerClickListener(
 
       // 確率に応じてメッセージを送信
       if (probabilityOfItem < 0.001) {
-        SendSoundEffect.sendEverySoundWithoutIgnore(Sound.ENTITY_ENDERDRAGON_DEATH, 0.5f, 2f)
+        SendSoundEffect.sendEverySoundWithoutIgnore(Sound.ENTITY_ENDER_DRAGON_DEATH, 0.5f, 2f)
 
         {
           playerData
@@ -249,7 +249,8 @@ class PlayerClickListener(
             .flatMap(settings =>
               IO {
                 if (!settings.shouldMuteMessages) {
-                  player.playSound(player.getLocation, Sound.ENTITY_ENDERDRAGON_DEATH, 0.5f, 2f)
+                  player
+                    .playSound(player.getLocation, Sound.ENTITY_ENDER_DRAGON_DEATH, 0.5f, 2f)
                 }
               }
             )
@@ -332,7 +333,7 @@ class PlayerClickListener(
     val equipmentSlot = event.getHand
 
     val currentItem = player.getInventory.getItemInMainHand.getType
-    if (currentItem == Material.STICK || currentItem == Material.SKULL_ITEM) return
+    if (currentItem == Material.STICK || currentItem == Material.PLAYER_HEAD) return
 
     val playerData = playerMap(player.getUniqueId)
     val playerLevel = SeichiAssist
@@ -458,7 +459,7 @@ class PlayerClickListener(
 
     val targetBlock = e.getClickedBlock
     // 頭じゃない場合無視
-    if (targetBlock.getType != Material.SKULL) {
+    if (targetBlock.getType != Material.PLAYER_HEAD) {
       return
     }
 

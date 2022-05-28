@@ -94,7 +94,7 @@ object RegionMenu extends Menu {
         }
 
         import scala.util.chaining._
-        new IconItemStackBuilder(Material.GOLD_AXE)
+        new IconItemStackBuilder(Material.GOLDEN_AXE)
           .tap { b => if (canMakeRegion) b.enchanted() }
           .title(s"$YELLOW$UNDERLINE${BOLD}保護の作成")
           .lore(lore.toList)

@@ -326,13 +326,12 @@ class PlayerBlockBreakListener(
     val data = SeichiAssist.playermap.apply(p.getUniqueId)
     // そもそも自分の保護じゃなきゃ処理かけない
     if (!ExternalPlugins.getWorldGuard.canBuild(p, b.getLocation)) return
-    if ((b.getType eq Material.DOUBLE_STEP) && b.getData == 0) {
-      b.setType(Material.STEP)
-      b.setData(0.toByte)
+    if ((b.getType eq Material.LEGACY_DOUBLE_STEP) && b.getData == 0) {
+      b.setType(Material.STONE_SLAB)
       val location = b.getLocation
-      world.dropItemNaturally(location, new ItemStack(Material.STEP))
+      world.dropItemNaturally(location, new ItemStack(Material.STONE_SLAB))
     }
-    if (b.getType ne Material.STEP) return
+    if (b.getType ne Material.STONE_SLAB) return
     if (b.getY > 5) return
     if (b.getData != 0) return
     if (!world.isSeichi) return

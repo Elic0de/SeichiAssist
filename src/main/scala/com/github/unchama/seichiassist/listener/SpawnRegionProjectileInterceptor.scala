@@ -23,9 +23,9 @@ object SpawnRegionProjectileInterceptor extends Listener {
     LINGERING_POTION,
     SPLASH_POTION,
     ENDER_PEARL,
-    EYE_OF_ENDER,
-    SNOW_BALL,
-    EXP_BOTTLE
+    ENDER_EYE,
+    SNOWBALL,
+    EXPERIENCE_BOTTLE
   )
 
   @EventHandler

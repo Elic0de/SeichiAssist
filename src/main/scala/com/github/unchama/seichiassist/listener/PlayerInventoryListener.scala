@@ -84,7 +84,7 @@ class PlayerInventoryListener(
         case item
             if !item.hasItemMeta ||
               !item.getItemMeta.hasLore ||
-              item.getType == Material.SKULL_ITEM =>
+              item.getType == Material.PLAYER_HEAD =>
           dropitem += item
         case item =>
           // ガチャ景品リスト上を線形探索する
@@ -200,7 +200,7 @@ class PlayerInventoryListener(
       Material.DIAMOND_ORE -> 4,
       Material.REDSTONE_ORE -> 32,
       Material.EMERALD_ORE -> 4,
-      Material.QUARTZ_ORE -> 16
+      Material.NETHER_QUARTZ_ORE -> 16
     )
 
     val inventoryContents = inventory.getContents.filter(_ != null)
@@ -311,7 +311,7 @@ class PlayerInventoryListener(
         case m
             if !m.hasItemMeta ||
               !m.getItemMeta.hasLore ||
-              m.getType == Material.SKULL_ITEM =>
+              m.getType == Material.PLAYER_HEAD =>
           dropitem.addOne(m)
         case m =>
           // ガチャ景品リストを一個ずつ見ていくfor文
@@ -431,7 +431,7 @@ class PlayerInventoryListener(
         return
       }
 
-      val isSkull = itemstackcurrent.getType == Material.SKULL_ITEM
+      val isSkull = itemstackcurrent.getType == Material.PLAYER_HEAD
 
       /*
        * クリックしたボタンに応じた各処理内容の記述ここから
@@ -498,7 +498,7 @@ class PlayerInventoryListener(
         val itemmeta = itemstackcurrent.getItemMeta
         itemstackcurrent.setItemMeta(itemmeta)
         player.openInventory(MenuInventoryData.getVotingMenuData(player))
-      } else if (itemstackcurrent.getType == Material.BOOK_AND_QUILL) {
+      } else if (itemstackcurrent.getType == Material.WRITABLE_BOOK) {
         // 投票リンク表示
         player.sendMessage(
           RED.toString + "" + UNDERLINE + "https://minecraft.jp/servers/54d3529e4ddda180780041a7/vote"
@@ -525,7 +525,7 @@ class PlayerInventoryListener(
         )
 
         // NOTE: WHEN
-      } else if (itemstackcurrent.getType == Material.WATCH) {
+      } else if (itemstackcurrent.getType == Material.CLOCK) {
         player.playSound(player.getLocation, Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1f, 1f)
         playerdata.toggleVotingFairy = playerdata.toggleVotingFairy % 4 + 1
         player.openInventory(MenuInventoryData.getVotingMenuData(player))
@@ -612,7 +612,7 @@ class PlayerInventoryListener(
       if (itemstackcurrent.getType == Material.NETHER_STAR) {
         playerdata.giganticBerserk = GiganticBerserk(0, 0, playerdata.giganticBerserk.stage + 1)
         player.playSound(player.getLocation, Sound.BLOCK_END_GATEWAY_SPAWN, 1f, 0.5f)
-        player.playSound(player.getLocation, Sound.ENTITY_ENDERDRAGON_AMBIENT, 1f, 0.8f)
+        player.playSound(player.getLocation, Sound.ENTITY_ENDER_DRAGON_AMBIENT, 1f, 0.8f)
         player.openInventory(MenuInventoryData.getGiganticBerserkAfterEvolutionMenu(player))
       }
     } else if (topinventory.getTitle == LIGHT_PURPLE.toString + "" + BOLD + "スキルを進化させました") {

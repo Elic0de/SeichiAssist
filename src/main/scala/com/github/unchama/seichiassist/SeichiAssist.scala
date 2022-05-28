@@ -804,7 +804,7 @@ object SeichiAssist {
     msgachadatalist
       .toList
       .zipWithIndex
-      .filter(_._1.itemStack.getType != Material.EXP_BOTTLE) // 経験値瓶だけはすでにリストにあるので除外
+      .filter(_._1.itemStack.getType != Material.EXPERIENCE_BOTTLE) // 経験値瓶だけはすでにリストにあるので除外
       .map {
         case (g, i) =>
           new MineStackObj(

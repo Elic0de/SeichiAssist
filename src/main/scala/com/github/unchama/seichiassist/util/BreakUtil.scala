@@ -102,7 +102,7 @@ object BreakUtil {
       }
 
       val isBlockProtectedSlab =
-        checkTarget.getType == Material.STEP &&
+        checkTarget.getType == Material.STONE_SLAB &&
           checkTarget.getY == halfBlockLayerYCoordinate &&
           checkTarget.getData == 0.toByte
 
@@ -180,9 +180,9 @@ object BreakUtil {
     val (blockLocation, blockMaterial, blockData) = blockInformation
 
     blockMaterial match {
-      case Material.GRASS_PATH | Material.SOIL =>
+      case Material.GRASS_PATH | Material.DIRT =>
         return Some(BlockBreakResult.ItemDrop(new ItemStack(Material.DIRT)))
-      case Material.MOB_SPAWNER | Material.ENDER_PORTAL_FRAME | Material.ENDER_PORTAL =>
+      case Material.SPAWNER | Material.END_PORTAL_FRAME | Material.END_PORTAL =>
         return None
       case _ =>
     }
@@ -200,12 +200,8 @@ object BreakUtil {
       Some {
         BlockBreakResult.ItemDrop {
           blockMaterial match {
-            case Material.GLOWING_REDSTONE_ORE =>
+            case Material.LEGACY_GLOWING_REDSTONE_ORE =>
               new ItemStack(Material.REDSTONE_ORE)
-            case Material.LOG | Material.LOG_2 | Material.LEAVES | Material.LEAVES_2 =>
-              new ItemStack(blockMaterial, 1, b_tree.toShort)
-            case Material.MONSTER_EGGS =>
-              new ItemStack(Material.STONE)
             case _ =>
               new ItemStack(blockMaterial, 1, blockDataLeast4Bits.toShort)
           }
@@ -228,10 +224,10 @@ object BreakUtil {
               dye.toItemStack(withBonus)
             case Material.EMERALD_ORE =>
               new ItemStack(Material.EMERALD, bonus)
-            case Material.REDSTONE_ORE | Material.GLOWING_REDSTONE_ORE =>
+            case Material.REDSTONE_ORE | Material.LEGACY_GLOWING_REDSTONE_ORE =>
               val withBonus = bonus * (rand + 4).toInt
               new ItemStack(Material.REDSTONE, withBonus)
-            case Material.QUARTZ_ORE =>
+            case Material.NETHER_QUARTZ_ORE =>
               new ItemStack(Material.QUARTZ, bonus)
             case _ =>
               // unreachable
@@ -252,9 +248,9 @@ object BreakUtil {
           Some(BlockBreakResult.ItemDrop(dye.toItemStack((rand * 4 + 4).toInt)))
         case Material.EMERALD_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.EMERALD)))
-        case Material.REDSTONE_ORE | Material.GLOWING_REDSTONE_ORE =>
+        case Material.REDSTONE_ORE | Material.LEGACY_GLOWING_REDSTONE_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.REDSTONE, (rand + 4).toInt)))
-        case Material.QUARTZ_ORE =>
+        case Material.NETHER_QUARTZ_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.QUARTZ)))
         case Material.STONE =>
           Some {
@@ -280,14 +276,8 @@ object BreakUtil {
           val dropMaterial = if (p > rand) Material.FLINT else Material.GRAVEL
 
           Some(BlockBreakResult.ItemDrop(new ItemStack(dropMaterial, bonus)))
-        case Material.LEAVES | Material.LEAVES_2 =>
-          None
         case Material.CLAY =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.CLAY_BALL, 4)))
-        case Material.MONSTER_EGGS =>
-          Some(BlockBreakResult.SpawnSilverFish(blockLocation))
-        case Material.LOG | Material.LOG_2 =>
-          Some(BlockBreakResult.ItemDrop(new ItemStack(blockMaterial, 1, b_tree.toShort)))
         case _ =>
           Some(
             BlockBreakResult
@@ -324,8 +314,8 @@ object BreakUtil {
       .filter(MaterialSets.materialsToCountBlockBreak.contains)
       .map {
         // 氷塊とマグマブロックの整地量を2倍
-        case Material.PACKED_ICE | Material.MAGMA => 2L
-        case _                                    => 1L
+        case Material.PACKED_ICE | Material.MAGMA_BLOCK => 2L
+        case _                                          => 1L
       }
       .sum
 
@@ -449,38 +439,15 @@ object BreakUtil {
     // minestackflagがfalseの時は処理を終了
     if (!playerData.settings.autoMineStack) return false
 
-    /**
-     * 必要であれば引数を対応するアイテム向けの[[Material]]へ変換する
-     * @param material
-     *   変換対象
-     * @return
-     *   変換されたかもしれないMaterial
-     */
-    def intoItem(material: Material): Material = {
-      material match {
-        case Material.ACACIA_DOOR   => Material.ACACIA_DOOR_ITEM
-        case Material.BIRCH_DOOR    => Material.BIRCH_DOOR_ITEM
-        case Material.BED_BLOCK     => Material.BED
-        case Material.BREWING_STAND => Material.BREWING_STAND_ITEM
-        case Material.CAULDRON      => Material.CAULDRON_ITEM
-        case Material.DARK_OAK_DOOR => Material.DARK_OAK_DOOR_ITEM
-        case Material.FLOWER_POT    => Material.FLOWER_POT_ITEM
-        case Material.JUNGLE_DOOR   => Material.JUNGLE_DOOR_ITEM
-        case Material.SPRUCE_DOOR   => Material.SPRUCE_DOOR_ITEM
-        case Material.SKULL         => Material.SKULL_ITEM
-        case Material.WOODEN_DOOR   => Material.WOOD_DOOR
-        case others                 => others
-      }
-    }
     val amount = itemstack.getAmount
-    val material = intoItem(itemstack.getType)
+    val material = itemstack.getType
 
     // 線路・キノコなどの、拾った時と壊した時とでサブIDが違う場合の処理
     // 拾った時のサブIDに合わせる
     if (
-      itemstack.getType == Material.RAILS
-      || itemstack.getType == Material.HUGE_MUSHROOM_1
-      || itemstack.getType == Material.HUGE_MUSHROOM_2
+      itemstack.getType == Material.RAIL
+      || itemstack.getType == Material.LEGACY_HUGE_MUSHROOM_1
+      || itemstack.getType == Material.LEGACY_HUGE_MUSHROOM_2
       || itemstack.getType == Material.PURPUR_STAIRS
       || itemstack.getType == Material.BONE_BLOCK
     ) {
