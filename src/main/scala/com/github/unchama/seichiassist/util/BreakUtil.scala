@@ -180,7 +180,7 @@ object BreakUtil {
     val (blockLocation, blockMaterial, blockData) = blockInformation
 
     blockMaterial match {
-      case Material.GRASS_PATH | Material.DIRT =>
+      case Material.GRASS_PATH | Material.FARMLAND =>
         return Some(BlockBreakResult.ItemDrop(new ItemStack(Material.DIRT)))
       case Material.SPAWNER | Material.END_PORTAL_FRAME | Material.END_PORTAL =>
         return None
@@ -191,7 +191,6 @@ object BreakUtil {
     val bonus = Math.max(1, rand * (fortuneLevel + 2) - 1).toInt
 
     val blockDataLeast4Bits = (blockData & 0x0f).toByte
-    val b_tree = (blockData & 0x03).toByte
 
     val silkTouch = tool.getEnchantmentLevel(Enchantment.SILK_TOUCH)
 
