@@ -8,7 +8,6 @@ import com.github.unchama.seichiassist.data.player.PlayerNickname;
 import com.github.unchama.seichiassist.task.VotingFairyTask;
 import com.github.unchama.seichiassist.util.AsyncInventorySetter;
 import com.github.unchama.seichiassist.util.ItemMetaFactory;
-import com.github.unchama.seichiassist.util.TypeConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -632,7 +631,7 @@ public final class MenuInventoryData {
             );
 
             final ItemStack itemstack = build(
-                    Material.BOOK_AND_QUILL,
+                    Material.WRITABLE_BOOK,
                     ChatColor.YELLOW + "" + ChatColor.UNDERLINE + "" + ChatColor.BOLD + "投票ページにアクセス",
                     lore
             );
@@ -660,7 +659,7 @@ public final class MenuInventoryData {
             );
 
             final ItemStack itemStack = build(
-                    Material.WATCH,
+                    Material.CLOCK,
                     ChatColor.AQUA + "" + ChatColor.UNDERLINE + "" + ChatColor.BOLD + "マナ妖精 時間設定",
                     list
             );
@@ -828,7 +827,7 @@ public final class MenuInventoryData {
         {
             // 色
             final byte[] table = {12, 15, 4, 0, 3};
-            final ItemStack itemstack = new ItemStack(Material.STAINED_GLASS_PANE, 1, table[playerdata.giganticBerserk().stage()]);
+            final ItemStack itemstack = new ItemStack(Material.LEGACY_STAINED_GLASS_PANE, 1, table[playerdata.giganticBerserk().stage()]);
             final ItemMeta itemmeta = itemstack.getItemMeta();
             itemmeta.setDisplayName(" ");
             itemstack.setItemMeta(itemmeta);
@@ -875,7 +874,7 @@ public final class MenuInventoryData {
             final byte[] table = {12, 15, 4, 0, 3, 12};
             final byte b = table[playerdata.giganticBerserk().stage()];
 
-            final ItemStack itemstack = new ItemStack(Material.STAINED_GLASS_PANE, 1, b);
+            final ItemStack itemstack = new ItemStack(Material.LEGACY_STAINED_GLASS_PANE, 1, b);
 
             final ItemMeta itemmeta = itemstack.getItemMeta();
             if (playerdata.giganticBerserk().stage() >= 4) {
@@ -955,7 +954,7 @@ public final class MenuInventoryData {
     }
 
     private static ItemStack buildPlayerSkull(final String name, final List<String> lore, final String owner, final Consumer<? super SkullMeta> modify) {
-        final ItemStack ret = new ItemStack(Material.SKULL_ITEM, 1, PLAYER_SKULL);
+        final ItemStack ret = new ItemStack(Material.PLAYER_HEAD, 1, PLAYER_SKULL);
         final SkullMeta sm = ItemMetaFactory.SKULL.getValue();
         if (name != null) {
             sm.setDisplayName(name);
