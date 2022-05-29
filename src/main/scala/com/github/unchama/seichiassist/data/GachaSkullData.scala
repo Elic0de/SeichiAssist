@@ -18,9 +18,8 @@ object GachaSkullData {
    * ノーマルガチャ券
    */
   val gachaSkull: ItemStack =
-    new ItemStack(Material.SKULL_ITEM, 1).tap { skull =>
+    new ItemStack(Material.PLAYER_HEAD, 1).tap { skull =>
       import skull._
-      setDurability(3)
       setItemMeta {
         ItemMetaFactory.SKULL.getValue.tap { meta =>
           import meta._
@@ -41,9 +40,8 @@ object GachaSkullData {
    * 投票報酬のガチャ券
    */
   val gachaForVoting: ItemStack =
-    new ItemStack(Material.SKULL_ITEM, 1).tap { itemStack =>
+    new ItemStack(Material.PLAYER_HEAD, 1).tap { itemStack =>
       import itemStack._
-      setDurability(3)
       setItemMeta {
         ItemMetaFactory.SKULL.getValue.tap { meta =>
           import meta._
@@ -64,9 +62,8 @@ object GachaSkullData {
    * ガチャ景品（当たり・大当たり）とガチャ券の交換システムで手に入るガチャ券
    */
   val gachaForExchanging: ItemStack = {
-    new ItemStack(Material.SKULL_ITEM, 1).tap { itemStack =>
+    new ItemStack(Material.PLAYER_HEAD, 1).tap { itemStack =>
       import itemStack._
-      setDurability(3)
       setItemMeta {
         ItemMetaFactory.SKULL.getValue.tap { meta =>
           import meta._

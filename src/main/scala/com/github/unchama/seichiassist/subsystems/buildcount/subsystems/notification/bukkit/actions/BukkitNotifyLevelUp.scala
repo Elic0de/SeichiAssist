@@ -32,7 +32,7 @@ object BukkitNotifyLevelUp {
               s"$GOLD${player.getName}の建築レベルが最大Lvに到達したよ(`･ω･´)"
             )(forString[IO])
             player.sendMessage(s"${GOLD}最大Lvに到達したよ(`･ω･´)")
-            sendEverySound(Sound.ENTITY_ENDERDRAGON_DEATH, 1.0f, 1.2f)
+            sendEverySound(Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.2f)
           })
         } else if (oldLevel < newLevel)
           Sync[F].delay {

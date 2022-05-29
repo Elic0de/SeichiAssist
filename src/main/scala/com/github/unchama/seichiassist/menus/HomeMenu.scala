@@ -113,7 +113,7 @@ object HomeMenu extends Menu {
 
     def setSubHomeButton(subHomeNumber: Int)(implicit environment: Environment): Button =
       Button(
-        new IconItemStackBuilder(Material.BED)
+        new IconItemStackBuilder(Material.WHITE_BED)
           .title(s"$YELLOW$UNDERLINE${BOLD}サブホームポイント${subHomeNumber}を設定")
           .lore(
             List(
@@ -137,7 +137,7 @@ object HomeMenu extends Menu {
 
     def removeSubHomeButton(subHomeNumber: Int)(implicit environment: Environment): Button =
       Button(
-        new IconItemStackBuilder(Material.WOOL, 14)
+        new IconItemStackBuilder(Material.WHITE_WOOL)
           .title(s"$RED$UNDERLINE${BOLD}サブホームポイント${subHomeNumber}を削除")
           .lore(
             List(
@@ -148,7 +148,7 @@ object HomeMenu extends Menu {
           )
           .build(),
         LeftClickButtonEffect {
-          FocusedSoundEffect(Sound.BLOCK_ENDERCHEST_CLOSE, 1f, 0.1f)
+          FocusedSoundEffect(Sound.BLOCK_ENDER_CHEST_CLOSE, 1f, 0.1f)
           SequentialEffect(
             environment
               .ioCanOpenSubHomeRemoveConfirmationMenu
@@ -241,7 +241,7 @@ object HomeMenu extends Menu {
 
     val changeButton: Button =
       Button(
-        new IconItemStackBuilder(Material.WOOL, durability = 5).title(s"${GREEN}変更する").build(),
+        new IconItemStackBuilder(Material.LIME_WOOL).title(s"${GREEN}変更する").build(),
         LeftClickButtonEffect {
           SequentialEffect(
             FocusedSoundEffect(Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1f, 1f),
@@ -253,7 +253,7 @@ object HomeMenu extends Menu {
 
     def cancelButton(implicit environment: Environment): Button =
       Button(
-        new IconItemStackBuilder(Material.WOOL, durability = 14).title(s"${RED}変更しない").build(),
+        new IconItemStackBuilder(Material.RED_WOOL).title(s"${RED}変更しない").build(),
         LeftClickButtonEffect {
           FocusedSoundEffect(Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1f, 1f)
           environment.ioCanOpenHomeMenu.open(HomeMenu)
@@ -303,7 +303,7 @@ object HomeMenu extends Menu {
 
     val removeButton: Button =
       Button(
-        new IconItemStackBuilder(Material.WOOL, durability = 5).title(s"${GREEN}削除する").build(),
+        new IconItemStackBuilder(Material.LIME_WOOL).title(s"${GREEN}削除する").build(),
         LeftClickButtonEffect {
           SequentialEffect(
             FocusedSoundEffect(Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1f, 1f),
@@ -315,7 +315,7 @@ object HomeMenu extends Menu {
 
     def cancelButton(implicit environment: Environment): Button =
       Button(
-        new IconItemStackBuilder(Material.WOOL, durability = 14).title(s"${RED}変更しない").build(),
+        new IconItemStackBuilder(Material.RED_WOOL).title(s"${RED}変更しない").build(),
         LeftClickButtonEffect {
           FocusedSoundEffect(Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1f, 1f)
           environment.ioCanOpenHomeMenu.open(HomeMenu)
