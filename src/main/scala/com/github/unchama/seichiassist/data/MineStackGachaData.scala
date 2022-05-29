@@ -45,7 +45,7 @@ class MineStackGachaData(
       // 盾、バナー用の模様判定
       val otherType = another.getType
       if (
-        (otherType == Material.SHIELD || otherType == Material.BANNER) && this
+        (otherType == Material.SHIELD || otherType == Material.WHITE_BANNER) && this
           .itemStack
           .getType == otherType
       ) {

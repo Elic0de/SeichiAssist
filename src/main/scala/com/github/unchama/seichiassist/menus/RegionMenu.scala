@@ -139,7 +139,7 @@ object RegionMenu extends Menu {
         s"$GREEN④メニューの${YELLOW}金の斧${GREEN}をクリック"
       )
 
-      val iconItemStack = new IconItemStackBuilder(Material.WOOD_AXE)
+      val iconItemStack = new IconItemStackBuilder(Material.WOODEN_AXE)
         .title(s"$YELLOW$UNDERLINE${BOLD}保護設定用の木の斧を召喚")
         .lore(
           wandUsage ++ List(
