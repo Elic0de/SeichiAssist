@@ -264,16 +264,18 @@ class PlayerData(@Deprecated() val uuid: UUID, val name: String) {
 
   private def updateVotingFairyState(): Unit = {
     // 効果は継続しているか
-    if (
-      this.usingVotingFairy && !TimeUtils.isVotingFairyPeriod(
+    val using = this.usingVotingFairy
+    if (using) {
+      if (!TimeUtils.isVotingFairyPeriod(
         this.votingFairyStartTime,
         this.votingFairyEndTime
-      )
-    ) {
-      this.usingVotingFairy = false
-      player.sendMessage(s"$LIGHT_PURPLE${BOLD}妖精は何処かへ行ってしまったようだ...")
-    } else if (this.usingVotingFairy) {
-      VotingFairyTask.speak(player, "おかえり！" + player.getName, true)
+      )) {
+        this.usingVotingFairy = false
+        player.sendMessage(s"$LIGHT_PURPLE${BOLD}妖精は何処かへ行ってしまったようだ...")
+      } else {
+        VotingFairyTask.speak(player, "おかえり！" + player.getName, true)
+
+      }
     }
   }
 
