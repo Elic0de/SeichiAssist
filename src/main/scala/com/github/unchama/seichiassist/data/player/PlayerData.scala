@@ -173,7 +173,7 @@ class PlayerData(@Deprecated() val uuid: UUID, val name: String) {
     synchronizeDisplayNameToLevelState()
 
     loadTotalExp()
-    isVotingFairy()
+    updateVotingFairyState()
   }
 
   // レベルを更新
@@ -262,7 +262,7 @@ class PlayerData(@Deprecated() val uuid: UUID, val name: String) {
     expmanager.setExp(totalexp)
   }
 
-  private def isVotingFairy(): Unit = {
+  private def updateVotingFairyState(): Unit = {
     // 効果は継続しているか
     if (
       this.usingVotingFairy && !TimeUtils.isVotingFairyPeriod(
