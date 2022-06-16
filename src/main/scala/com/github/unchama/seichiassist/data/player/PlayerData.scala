@@ -266,10 +266,7 @@ class PlayerData(@Deprecated() val uuid: UUID, val name: String) {
     // 効果は継続しているか
     val using = this.usingVotingFairy
     if (using) {
-      if (TimeUtils.isVotingFairyPeriod(
-        this.votingFairyStartTime,
-        this.votingFairyEndTime
-      )) {
+      if (TimeUtils.isVotingFairyPeriod(this.votingFairyStartTime, this.votingFairyEndTime)) {
         VotingFairyTask.speak(player, "おかえり！" + player.getName, true)
       } else {
         this.usingVotingFairy = false
