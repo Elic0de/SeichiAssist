@@ -20,6 +20,7 @@ import com.github.unchama.util.external.ExternalPlugins
 import org.bukkit.ChatColor.RED
 import org.bukkit._
 import org.bukkit.block.Block
+import org.bukkit.block.data.`type`.Slab
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
@@ -326,7 +327,7 @@ class PlayerBlockBreakListener(
     val data = SeichiAssist.playermap.apply(p.getUniqueId)
     // そもそも自分の保護じゃなきゃ処理かけない
     if (!ExternalPlugins.getWorldGuard.canBuild(p, b.getLocation)) return
-    if ((b.getType eq Material.LEGACY_DOUBLE_STEP) && b.getData == 0) {
+    if (b.getType.isBlock && b.getType.asInstanceOf[Block].isInstanceOf[Slab]) {
       b.setType(Material.STONE_SLAB)
       val location = b.getLocation
       world.dropItemNaturally(location, new ItemStack(Material.STONE_SLAB))
