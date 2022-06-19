@@ -3,7 +3,7 @@ package com.github.unchama.itemstackbuilder
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
 import org.bukkit.inventory.meta.SkullMeta
-import org.bukkit.{Bukkit, Material, SkullType}
+import org.bukkit.{Bukkit, Material}
 
 import java.util.UUID
 

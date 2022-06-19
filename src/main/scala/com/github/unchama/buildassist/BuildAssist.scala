@@ -166,7 +166,7 @@ object BuildAssist {
       ,
       Material.GLOWSTONE,
       Material.BLACK_STAINED_GLASS,
-      Material.BLUE_STAINED_GLASS ,
+      Material.BLUE_STAINED_GLASS,
       Material.BROWN_STAINED_GLASS,
       Material.CYAN_STAINED_GLASS,
       Material.GRAY_STAINED_GLASS,
@@ -668,7 +668,7 @@ object BuildAssist {
       Material.JUNGLE_LEAVES,
       Material.ACACIA_LEAVES,
       Material.DARK_OAK_LEAVES,
-      Material.SPRUCE_LEAVES,
+      Material.SPRUCE_LEAVES
     )
 
   // ハーフブロックとして扱うMaterial
