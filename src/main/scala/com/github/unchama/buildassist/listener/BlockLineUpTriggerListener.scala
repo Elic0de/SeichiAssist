@@ -8,6 +8,8 @@ import com.github.unchama.seichiassist.subsystems.buildcount.domain.explevel.Bui
 import com.github.unchama.seichiassist.subsystems.mana.ManaApi
 import com.github.unchama.seichiassist.{MineStackObjectList, SeichiAssist}
 import com.github.unchama.util.external.ExternalPlugins
+import org.bukkit.block.Block
+import org.bukkit.block.data.`type`.Slab
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
@@ -15,6 +17,7 @@ import org.bukkit.event.{EventHandler, Listener}
 import org.bukkit.inventory.ItemStack
 import org.bukkit.{Material, Sound}
 
+import scala.util.chaining.scalaUtilChainingOps
 import scala.util.control.Breaks
 
 class BlockLineUpTriggerListener[
@@ -131,14 +134,10 @@ class BlockLineUpTriggerListener[
       Seq(Some(available), manaCap, Some(64L)).flatten.min
     }.toInt
 
-    // TODO これをlegacyMaterialから置き換えるべきだが、現時点ではよくわからないのでとりあえずlegacyMaterialを利用する
-    def slabToDoubleSlab(material: Material) = material match {
-      case Material.LEGACY_STONE_SLAB2 => Material.LEGACY_DOUBLE_STONE_SLAB2
-      case Material.PURPUR_SLAB        => Material.LEGACY_PURPUR_DOUBLE_SLAB
-      case Material.LEGACY_WOOD_STEP   => Material.LEGACY_WOOD_DOUBLE_STEP
-      case Material.LEGACY_STEP        => Material.LEGACY_DOUBLE_STEP
-      case _                           => mainHandItemType
-    }
+    def slabToDoubleSlab(material: Material): Material =
+      if (material.isBlock && material.asInstanceOf[Block].isInstanceOf[Slab]) {
+        material.asInstanceOf[Slab].tap(slab => slab.setType(Slab.Type.DOUBLE)).getMaterial
+      } else material
 
     val playerHoldsSlabBlock = BuildAssist.material_slab2.contains(mainHandItemType)
     (mainHandItemType eq Material.OAK_LEAVES) || (mainHandItemType eq Material.DARK_OAK_LEAVES) || (
