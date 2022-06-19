@@ -283,7 +283,6 @@ class PlayerBlockBreakListener(
   def onPlayerBreakBlockFinally(event: BlockBreakEvent): Unit = {
     val player = event.getPlayer
     val block = event.getBlock
-    import PluginExecutionContexts.timer
     val amount = SeichiExpAmount.ofNonNegative {
       BreakUtil
         .blockCountWeight[IO](event.getPlayer.getWorld)
@@ -324,7 +323,6 @@ class PlayerBlockBreakListener(
     val p = event.getPlayer
     val b = event.getBlock
     val world = p.getWorld
-    val data = SeichiAssist.playermap.apply(p.getUniqueId)
     // そもそも自分の保護じゃなきゃ処理かけない
     if (!ExternalPlugins.getWorldGuard.canBuild(p, b.getLocation)) return
     if (b.getType.isBlock && b.getType.asInstanceOf[Block].isInstanceOf[Slab]) {
@@ -336,7 +334,6 @@ class PlayerBlockBreakListener(
     if (b.getY > 5) return
     if (b.getData != 0) return
     if (!world.isSeichi) return
-    if (data.canBreakHalfBlock) return
     event.setCancelled(true)
     p.sendMessage(s"${RED}Y5以下に敷かれたハーフブロックは破壊不可能です。")
   }
