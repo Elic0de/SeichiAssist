@@ -13,7 +13,6 @@ object MaterialSets {
     Material.LAPIS_ORE,
     Material.EMERALD_ORE,
     Material.REDSTONE_ORE,
-    Material.LEGACY_GLOWING_REDSTONE_ORE,
     Material.NETHER_QUARTZ_ORE
   )
 

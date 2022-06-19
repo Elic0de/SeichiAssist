@@ -223,7 +223,7 @@ object BreakUtil {
               dye.toItemStack(withBonus)
             case Material.EMERALD_ORE =>
               new ItemStack(Material.EMERALD, bonus)
-            case Material.REDSTONE_ORE | Material.LEGACY_GLOWING_REDSTONE_ORE =>
+            case Material.REDSTONE_ORE =>
               val withBonus = bonus * (rand + 4).toInt
               new ItemStack(Material.REDSTONE, withBonus)
             case Material.NETHER_QUARTZ_ORE =>
@@ -247,7 +247,7 @@ object BreakUtil {
           Some(BlockBreakResult.ItemDrop(dye.toItemStack((rand * 4 + 4).toInt)))
         case Material.EMERALD_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.EMERALD)))
-        case Material.REDSTONE_ORE | Material.LEGACY_GLOWING_REDSTONE_ORE =>
+        case Material.REDSTONE_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.REDSTONE, (rand + 4).toInt)))
         case Material.NETHER_QUARTZ_ORE =>
           Some(BlockBreakResult.ItemDrop(new ItemStack(Material.QUARTZ)))

@@ -63,10 +63,7 @@ object BlockSearching {
     targetBlock =>
       val blockMaterials = Set(referenceBlock.getType, targetBlock.getType)
 
-      val identifications = List(
-        Set(Material.DIRT, Material.GRASS),
-        Set(Material.REDSTONE_ORE, Material.LEGACY_GLOWING_REDSTONE_ORE)
-      )
+      val identifications = List(Set(Material.DIRT, Material.GRASS), Set(Material.REDSTONE_ORE))
 
       // マテリアルが同一視により等しくなるかどうか
       blockMaterials.size == 1 || identifications.exists(blockMaterials.subsetOf)
