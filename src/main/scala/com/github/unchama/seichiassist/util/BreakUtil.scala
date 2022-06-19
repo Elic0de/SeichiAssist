@@ -198,12 +198,7 @@ object BreakUtil {
       // シルクタッチの処理
       Some {
         BlockBreakResult.ItemDrop {
-          blockMaterial match {
-            case Material.LEGACY_GLOWING_REDSTONE_ORE =>
-              new ItemStack(Material.REDSTONE_ORE)
-            case _ =>
-              new ItemStack(blockMaterial, 1, blockDataLeast4Bits.toShort)
-          }
+          new ItemStack(blockMaterial, 1)
         }
       }
     } else if (fortuneLevel > 0 && MaterialSets.fortuneMaterials.contains(blockMaterial)) {
