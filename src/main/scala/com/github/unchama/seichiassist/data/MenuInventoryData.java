@@ -826,8 +826,14 @@ public final class MenuInventoryData {
         final Inventory inventory = getEmptyInventory(6, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "スキルを進化させますか?");
         {
             // 色
-            final byte[] table = {12, 15, 4, 0, 3};
-            final ItemStack itemstack = new ItemStack(Material.LEGACY_STAINED_GLASS_PANE, 1, table[playerdata.giganticBerserk().stage()]);
+            final Material[] table = {
+                Material.ORANGE_STAINED_GLASS_PANE,
+                Material.BLACK_STAINED_GLASS_PANE,
+                Material.YELLOW_STAINED_GLASS_PANE,
+                Material.WHITE_STAINED_GLASS_PANE,
+                Material.LIGHT_BLUE_STAINED_GLASS_PANE
+            };
+            final ItemStack itemstack = new ItemStack(table[playerdata.giganticBerserk().stage()], 1);
             final ItemMeta itemmeta = itemstack.getItemMeta();
             itemmeta.setDisplayName(" ");
             itemstack.setItemMeta(itemmeta);
@@ -871,10 +877,16 @@ public final class MenuInventoryData {
         if (isError(p, playerdata, "GiganticBerserk進化後画面")) return null;
         final Inventory inventory = getEmptyInventory(6, ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "スキルを進化させました");
         {
-            final byte[] table = {12, 15, 4, 0, 3, 12};
-            final byte b = table[playerdata.giganticBerserk().stage()];
+            final Material[] table = {
+                Material.BROWN_STAINED_GLASS_PANE,
+                Material.BLACK_STAINED_GLASS_PANE,
+                Material.YELLOW_STAINED_GLASS_PANE,
+                Material.WHITE_STAINED_GLASS_PANE,
+                Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+                Material.BROWN_STAINED_GLASS_PANE
+            };
 
-            final ItemStack itemstack = new ItemStack(Material.LEGACY_STAINED_GLASS_PANE, 1, b);
+            final ItemStack itemstack = new ItemStack(table[playerdata.giganticBerserk().stage()], 1);
 
             final ItemMeta itemmeta = itemstack.getItemMeta();
             if (playerdata.giganticBerserk().stage() >= 4) {
