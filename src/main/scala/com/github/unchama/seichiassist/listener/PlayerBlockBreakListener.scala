@@ -325,7 +325,7 @@ class PlayerBlockBreakListener(
     val world = p.getWorld
     // そもそも自分の保護じゃなきゃ処理かけない
     if (!ExternalPlugins.getWorldGuard.canBuild(p, b.getLocation)) return
-    if (b.getType.isBlock && b.getType.asInstanceOf[Block].isInstanceOf[Slab]) {
+    if (b.isInstanceOf[Slab]) {
       b.setType(Material.STONE_SLAB)
       val location = b.getLocation
       world.dropItemNaturally(location, new ItemStack(Material.STONE_SLAB))

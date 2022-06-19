@@ -135,7 +135,7 @@ class BlockLineUpTriggerListener[
     }.toInt
 
     def slabToDoubleSlab(material: Material): Material =
-      if (material.isBlock && material.asInstanceOf[Block].isInstanceOf[Slab]) {
+      if (material.createBlockData().isInstanceOf[Slab]) {
         material.asInstanceOf[Slab].tap(slab => slab.setType(Slab.Type.DOUBLE)).getMaterial
       } else material
 
